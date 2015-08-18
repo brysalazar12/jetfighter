@@ -7,6 +7,7 @@ package test;
 import framework.ErrorDialog;
 import framework.GForm;
 import framework.GKeyManager;
+import framework.MakeSound;
 import game.Asteroids;
 import game.Background;
 import game.Bullet;
@@ -23,7 +24,14 @@ import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -64,7 +72,7 @@ public class GBulletTest extends Frame implements Runnable, KeyListener {
                
                // bullet hit the asteriod
                if(bullet.get(i).isHit) {
-                  
+                  MakeSound.play("sounds/hit.wav");
                   // increase points
                   points++;
                   
@@ -97,6 +105,7 @@ public class GBulletTest extends Frame implements Runnable, KeyListener {
                asteriod.get(i).animate();
                
                if(asteriod.get(i).isHit) {
+				  MakeSound.play("sounds/hit.wav");
                   jet.lifePoints -= asteriod.get(i).damage;
                   // create explosion
                   explosion.add(new Explosion());
@@ -227,6 +236,7 @@ public class GBulletTest extends Frame implements Runnable, KeyListener {
       if(GKeyManager.FIRE) {
 //         System.out.println(bullet.size());
          bullet.add(new Bullet(jet));
+		 MakeSound.play("sounds/shot.wav");
       }
    }
 
